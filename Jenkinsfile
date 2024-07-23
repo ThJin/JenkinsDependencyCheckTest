@@ -7,15 +7,6 @@ pipeline {
 
 			}
 		}
-		
-        stage('Purge Dependency-Check Cache') {
-            steps {
-                script {
-                    sh 'dependency-check.sh --purge'
-
-                }
-            }
-        }
 
 		stage('OWASP Dependency-Check Vulnerabilities') {
 			steps {
@@ -23,6 +14,7 @@ pipeline {
 							-o './'
 							-s './'
 							-f 'ALL'
+							--purge
 							--prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
 				
 				dependencyCheckPublisher pattern: 'dependency-check-report.xml'
