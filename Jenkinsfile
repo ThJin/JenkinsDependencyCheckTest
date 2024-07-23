@@ -11,9 +11,8 @@ pipeline {
         stage('Purge Dependency-Check Cache') {
             steps {
                 script {
-                    docker.image('owasp-dependency-check:6.5.1').inside {
-                        sh 'dependency-check.sh --purge'
-                    }
+                    sh 'dependency-check.sh --purge'
+
                 }
             }
         }
