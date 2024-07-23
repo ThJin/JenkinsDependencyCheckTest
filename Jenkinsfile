@@ -7,6 +7,16 @@ pipeline {
 
 			}
 		}
+		
+        stage('Update NVD Data') {
+            steps {
+                script {
+                    docker.image('owasp-dependency-check:10.0.3').inside('--volume dependency-check-cache:/dependency-check/data') {
+                        sh 'dependency-check.sh --updateonly --data /dependency-check/data'
+                    }
+                }
+            }
+        }		
 
 		stage('OWASP Dependency-Check Vulnerabilities') {
 			steps {
