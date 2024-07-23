@@ -14,6 +14,7 @@ pipeline {
 							-o './'
 							-s './'
 							-f 'ALL'
+							--noupdate	
 							--nvdApiDelay 10000
 							--prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
 				
