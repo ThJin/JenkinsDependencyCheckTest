@@ -14,6 +14,7 @@ pipeline {
 							-o './'
 							-s './'
 							-f 'ALL'
+							--cveValidForHours 48
 							--prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
 				
 				dependencyCheckPublisher pattern: 'dependency-check-report.xml'
