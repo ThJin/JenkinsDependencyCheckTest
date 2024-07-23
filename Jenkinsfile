@@ -7,6 +7,16 @@ pipeline {
 
 			}
 		}
+		
+        stage('Purge Dependency-Check Cache') {
+            steps {
+                script {
+                    docker.image('owasp-dependency-check:6.5.1').inside {
+                        sh 'dependency-check.sh --purge'
+                    }
+                }
+            }
+        }
 
 		stage('OWASP Dependency-Check Vulnerabilities') {
 			steps {
@@ -14,7 +24,6 @@ pipeline {
 							-o './'
 							-s './'
 							-f 'ALL'
-							--cveValidForHours 48
 							--prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
 				
 				dependencyCheckPublisher pattern: 'dependency-check-report.xml'
